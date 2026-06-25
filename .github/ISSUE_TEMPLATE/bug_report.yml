@@ -1,7 +1,8 @@
 name: Bug report
 description: 動作不良や他ソフトウェアとの競合を報告します
 title: "[Bug] "
-labels: []
+labels:
+  - bug
 body:
   - type: markdown
     attributes:

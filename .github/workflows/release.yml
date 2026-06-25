@@ -111,7 +111,7 @@ jobs:
                   "dist\README.md",
                   "dist\NOTICE.md",
                   "dist\SHA256SUMS.txt" `
-            -DestinationPath "dist\AltIME-US-v$version.zip"
+            -DestinationPath "dist\AltIME-US-v$version-x64.zip"
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
