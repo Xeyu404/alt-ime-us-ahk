@@ -1,6 +1,7 @@
 # Compiled AutoHotkey output
 *.exe
 *.bin
+dist/
 
 # Logs and temporary files
 *.log

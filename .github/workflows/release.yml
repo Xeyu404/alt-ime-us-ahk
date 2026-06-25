@@ -1,0 +1,139 @@
+name: Build and release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Download build tools
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Stop"
+          $headers = @{
+            Accept = "application/vnd.github+json"
+            "User-Agent" = "US-AltIME-release"
+          }
+
+          $ahkVersion = "2.0.19"
+          $ahkRelease = Invoke-RestMethod `
+            -Headers $headers `
+            -Uri "https://api.github.com/repos/AutoHotkey/AutoHotkey/releases/tags/v$ahkVersion"
+          $ahkAsset = $ahkRelease.assets |
+            Where-Object { $_.name -eq "AutoHotkey_$ahkVersion.zip" } |
+            Select-Object -First 1
+          if (!$ahkAsset) {
+            throw "AutoHotkey archive was not found."
+          }
+
+          $compilerRelease = Invoke-RestMethod `
+            -Headers $headers `
+            -Uri "https://api.github.com/repos/AutoHotkey/Ahk2Exe/releases/latest"
+          $compilerAsset = $compilerRelease.assets |
+            Where-Object { $_.name -match "\.zip$" } |
+            Select-Object -First 1
+          if (!$compilerAsset) {
+            throw "Ahk2Exe archive was not found."
+          }
+
+          Invoke-WebRequest `
+            -Headers $headers `
+            -Uri $ahkAsset.browser_download_url `
+            -OutFile "$env:RUNNER_TEMP\autohotkey.zip"
+          Invoke-WebRequest `
+            -Headers $headers `
+            -Uri $compilerAsset.browser_download_url `
+            -OutFile "$env:RUNNER_TEMP\ahk2exe.zip"
+
+          Expand-Archive "$env:RUNNER_TEMP\autohotkey.zip" "$env:RUNNER_TEMP\autohotkey"
+          Expand-Archive "$env:RUNNER_TEMP\ahk2exe.zip" "$env:RUNNER_TEMP\ahk2exe"
+
+      - name: Compile and package
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Stop"
+          $version = "${{ github.ref_name }}".TrimStart("v")
+          $outputName = "US-AltIME-v$version-x64.exe"
+
+          $base = Get-ChildItem "$env:RUNNER_TEMP\autohotkey" `
+            -Recurse -Filter "AutoHotkey64.exe" |
+            Select-Object -First 1
+          $compiler = Get-ChildItem "$env:RUNNER_TEMP\ahk2exe" `
+            -Recurse -Filter "Ahk2Exe.exe" |
+            Select-Object -First 1
+          if (!$base -or !$compiler) {
+            throw "AutoHotkey build tools were not found after extraction."
+          }
+
+          New-Item -ItemType Directory -Force "dist" | Out-Null
+          & $compiler.FullName `
+            /in "$PWD\US-AltIMEv3.ahk" `
+            /out "$PWD\dist\$outputName" `
+            /base $base.FullName `
+            /silent verbose
+
+          for ($attempt = 0; $attempt -lt 20; $attempt++) {
+            if (Test-Path "dist\$outputName") {
+              break
+            }
+            Start-Sleep -Milliseconds 500
+          }
+          if (!(Test-Path "dist\$outputName")) {
+            throw "Ahk2Exe did not produce the expected executable."
+          }
+
+          Copy-Item "US-AltIMEv3.ahk" "dist\US-AltIME-v$version.ahk"
+          Copy-Item "README.md", "NOTICE.md" "dist"
+
+          $hashFiles = @(
+            "dist\$outputName",
+            "dist\US-AltIME-v$version.ahk"
+          )
+          $hashLines = foreach ($file in $hashFiles) {
+            $hash = Get-FileHash $file -Algorithm SHA256
+            "$($hash.Hash.ToLower())  $([IO.Path]::GetFileName($file))"
+          }
+          $hashLines | Set-Content "dist\SHA256SUMS.txt" -Encoding ascii
+
+          Compress-Archive `
+            -Path "dist\$outputName",
+                  "dist\US-AltIME-v$version.ahk",
+                  "dist\README.md",
+                  "dist\NOTICE.md",
+                  "dist\SHA256SUMS.txt" `
+            -DestinationPath "dist\US-AltIME-v$version.zip"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: US-AltIME-${{ github.ref_name }}
+          path: dist/*
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: US-AltIME ${{ github.ref_name }}
+          body: |
+            ## US-AltIME ${{ github.ref_name }}
+
+            - Right Alt tap: IME ON
+            - Left Alt tap: IME OFF
+            - Alt combinations retain normal Alt behavior
+
+            `US-AltIME-${{ github.ref_name }}-x64.exe` is an unsigned 64-bit Windows executable.
+            Verify downloads with `SHA256SUMS.txt`.
+          files: |
+            dist/*.exe
+            dist/*.ahk
+            dist/*.zip
+            dist/SHA256SUMS.txt
