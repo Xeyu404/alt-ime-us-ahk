@@ -1,14 +1,14 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
-;@Ahk2Exe-SetName US-AltIME
+;@Ahk2Exe-SetName AltIME for US Layout
 ;@Ahk2Exe-SetDescription Alt-tap IME control for US keyboards
-;@Ahk2Exe-SetVersion 3.0.0.0
+;@Ahk2Exe-SetVersion 3.0.1.0
 ;@Ahk2Exe-SetCompanyName Xeyu404
-;@Ahk2Exe-SetOrigFilename US-AltIME-v3.0.0-x64.exe
+;@Ahk2Exe-SetOrigFilename AltIME-US-v3.0.1-x64.exe
 
-; US-AltIME v3.0.0
-; Repository: https://github.com/Xeyu404/alt-ime-ahkv2
+; AltIME for US Layout v3.0.1
+; Repository: https://github.com/Xeyu404/alt-ime-us-ahk
 ; Based on: https://github.com/kskmori/US-AltIME.ahk
 ;
 ; US keyboard Alt IME control:

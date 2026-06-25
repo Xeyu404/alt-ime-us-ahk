@@ -1,4 +1,4 @@
-# US-AltIME for AutoHotkey v2
+# AltIME for US Layout
 
 ![AutoHotkey](https://img.shields.io/badge/AutoHotkey-v2.0%2B-334455?logo=autohotkey)
 ![Platform](https://img.shields.io/badge/platform-Windows-0078D4?logo=windows)
@@ -37,8 +37,8 @@ AutoHotkey v1 では動作しません。
 
 ### EXE版（推奨）
 
-1. [Releases](https://github.com/Xeyu404/alt-ime-ahkv2/releases/latest) を開きます。
-2. `US-AltIME-v*-x64.exe` または配布用ZIPをダウンロードします。
+1. [Releases](https://github.com/Xeyu404/alt-ime-us-ahk/releases/latest) を開きます。
+2. `AltIME-US-v*-x64.exe` または配布用ZIPをダウンロードします。
 3. EXEを任意のフォルダーへ置き、ダブルクリックして実行します。
 
 AutoHotkey本体のインストールは不要です。
@@ -48,9 +48,9 @@ AutoHotkey本体のインストールは不要です。
 
 ### ソース版
 
-1. [US-AltIMEv3.ahk](./US-AltIMEv3.ahk) をダウンロードします。
+1. [AltIME-US.ahk](./AltIME-US.ahk) をダウンロードします。
 2. AutoHotkey v2 をインストールします。
-3. `US-AltIMEv3.ahk` をダブルクリックして実行します。
+3. `AltIME-US.ahk` をダブルクリックして実行します。
 4. タスクトレイに AutoHotkey のアイコンが表示されれば起動完了です。
 
 ## ダウンロードの検証
@@ -58,14 +58,14 @@ AutoHotkey本体のインストールは不要です。
 Releaseに添付された `SHA256SUMS.txt` と、ダウンロードしたファイルのSHA-256を比較できます。
 
 ```powershell
-Get-FileHash ".\US-AltIME-v3.0.0-x64.exe" -Algorithm SHA256
+Get-FileHash ".\AltIME-US-v3.0.1-x64.exe" -Algorithm SHA256
 ```
 
 ## Windows 起動時に自動実行する
 
 1. `Win + R` を押します。
 2. `shell:startup` と入力して Enter を押します。
-3. 開いたフォルダーに `US-AltIMEv3.ahk` のショートカットを配置します。
+3. 開いたフォルダーに `AltIME-US.ahk` のショートカットを配置します。
 
 スクリプトを更新した場合は、実行中のスクリプトを再起動してください。`#SingleInstance Force` により、新しいインスタンスを起動すると古いインスタンスが置き換えられます。
 

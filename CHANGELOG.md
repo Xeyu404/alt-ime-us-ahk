@@ -6,6 +6,16 @@
 
 現在、未リリースの変更はありません。
 
+## [3.0.1] - 2026-06-25
+
+### Changed
+
+- プロジェクト名を `AltIME for US Layout` に変更
+- リポジトリ名を `alt-ime-us-ahk` に変更
+- ソースファイル名を `AltIME-US.ahk` に変更
+- 配布ファイル名を `AltIME-US-v<version>-x64.exe` 形式に変更
+- README、ビルド手順、Release自動化、製品情報を新名称へ統一
+
 ## [3.0.0] - 2026-06-25
 
 ### Added

@@ -17,8 +17,8 @@ PowerShell でリポジトリのルートから次を実行します。
 New-Item -ItemType Directory -Force dist | Out-Null
 
 & "C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe" `
-  /in ".\US-AltIMEv3.ahk" `
-  /out ".\dist\US-AltIME-v3.0.0-x64.exe" `
+  /in ".\AltIME-US.ahk" `
+  /out ".\dist\AltIME-US-v3.0.1-x64.exe" `
   /base "C:\Program Files\AutoHotkey\v2\AutoHotkey64.exe" `
   /silent verbose
 ```
@@ -34,10 +34,10 @@ C:\Program Files\AutoHotkey\v2.0.19\AutoHotkey64.exe
 出力ファイルとバージョン情報を確認します。
 
 ```powershell
-Get-Item ".\dist\US-AltIME-v3.0.0-x64.exe" |
+Get-Item ".\dist\AltIME-US-v3.0.1-x64.exe" |
   Select-Object FullName, Length, VersionInfo
 
-Get-FileHash ".\dist\US-AltIME-v3.0.0-x64.exe" -Algorithm SHA256
+Get-FileHash ".\dist\AltIME-US-v3.0.1-x64.exe" -Algorithm SHA256
 ```
 
 ## Release automation
@@ -52,8 +52,8 @@ Get-FileHash ".\dist\US-AltIME-v3.0.0-x64.exe" -Algorithm SHA256
 例:
 
 ```powershell
-git tag -a v3.0.0 -m "US-AltIME v3.0.0"
-git push origin v3.0.0
+git tag -a v3.0.1 -m "AltIME for US Layout v3.0.1"
+git push origin v3.0.1
 ```
 
 ## Code signing

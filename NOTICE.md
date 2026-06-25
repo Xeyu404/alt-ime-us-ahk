@@ -2,13 +2,13 @@
 
 ## Project lineage and attribution
 
-`US-AltIMEv3.ahk` は、[kskmori/US-AltIME.ahk](https://github.com/kskmori/US-AltIME.ahk) の Alt / IME 制御部分を直接のベースとして再構成した派生物です。
+`AltIME-US.ahk` は、[kskmori/US-AltIME.ahk](https://github.com/kskmori/US-AltIME.ahk) の Alt / IME 制御部分を直接のベースとして再構成した派生物です。
 
 kskmori 版は、[karakaram/alt-ime-ahk](https://github.com/karakaram/alt-ime-ahk) の「左右 Alt の空打ちで IME を明示的に OFF / ON にする」機能を継承・拡張しています。そのため、本プロジェクトには次の系譜があります。
 
 1. `karakaram/alt-ime-ahk`: 元となる操作設計と実装
 2. `kskmori/US-AltIME.ahk`: AutoHotkey v2 対応を含む拡張実装
-3. `Xeyu404/alt-ime-ahkv2`: Alt / IME 制御に絞った再構成と堅牢化
+3. `Xeyu404/alt-ime-us-ahk`: Alt / IME 制御に絞った再構成と堅牢化
 
 各プロジェクトの著作権は、それぞれの著作権者に帰属します。
 
