@@ -1,0 +1,87 @@
+name: Bug report
+description: 動作不良や他ソフトウェアとの競合を報告します
+title: "[Bug] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        報告ありがとうございます。再現に必要な情報を可能な範囲で記入してください。
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: 問題の概要
+      description: 何が起きているかを簡潔に説明してください。
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現手順
+      description: 問題を再現するための操作を順番に記載してください。
+      placeholder: |
+        1. スクリプトを起動する
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待する動作
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 実際の動作
+    validations:
+      required: true
+
+  - type: input
+    id: windows
+    attributes:
+      label: Windows バージョン
+      placeholder: Windows 11 24H2
+    validations:
+      required: true
+
+  - type: input
+    id: autohotkey
+    attributes:
+      label: AutoHotkey バージョン
+      placeholder: v2.0.19 64-bit
+    validations:
+      required: true
+
+  - type: input
+    id: keyboard
+    attributes:
+      label: キーボード配列
+      placeholder: US 配列
+    validations:
+      required: true
+
+  - type: input
+    id: ime
+    attributes:
+      label: 使用している IME
+      placeholder: Microsoft IME
+    validations:
+      required: true
+
+  - type: textarea
+    id: related-software
+    attributes:
+      label: 同時に使用している入力関連ソフトウェア
+      description: 他の AutoHotkey スクリプト、PowerToys、キーボードリマップツールなどを記載してください。
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 補足情報
+      description: ログ、スクリーンショット、回避方法などがあれば記載してください。
