@@ -1,0 +1,42 @@
+name: Feature request
+description: 機能追加や改善案を提案します
+title: "[Feature] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        提案ありがとうございます。現在の左右 Alt の基本動作を維持できるかも含めて記載してください。
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 解決したい問題
+      description: どのような不便や制約があるかを説明してください。
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 提案する変更
+      description: 希望する動作や設定方法を具体的に説明してください。
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 検討した代替案
+      description: 現在利用している回避方法や他の案があれば記載してください。
+
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: 互換性への影響
+      description: Alt ショートカットや他の AutoHotkey スクリプトへの影響が考えられる場合は記載してください。
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 補足情報
