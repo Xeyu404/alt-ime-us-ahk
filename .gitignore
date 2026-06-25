@@ -1,0 +1,22 @@
+# Compiled AutoHotkey output
+*.exe
+*.bin
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.old
+*~
+
+# Archives
+*.zip
+*.7z
+
+# Editor settings
+.vscode/
+.idea/
+
+# Windows metadata
+Thumbs.db
+Desktop.ini
