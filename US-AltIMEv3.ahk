@@ -1,6 +1,8 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
+; US-AltIME v3.0.0
+; Repository: https://github.com/Xeyu404/alt-ime-ahkv2
 ; Based on: https://github.com/kskmori/US-AltIME.ahk
 ;
 ; US keyboard Alt IME control:
